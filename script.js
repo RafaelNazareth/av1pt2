@@ -56,7 +56,8 @@ function mapearElementos() {
     el.totalEleitores = document.getElementById("totalEleitores");
     el.etapaVotacao = document.getElementById("etapaVotacao");
     el.totalPartidos = document.getElementById("totalPartidos");
-    el.audioConfirmacao = document.getElementById("audioConfirmacao");
+    el.audioConfirmacaoCurta = document.getElementById("audioConfirmacaoCurta");
+    el.audioPililiFinal = document.getElementById("audioPililiFinal");
 }
 
 function vincularEventos() {
@@ -78,9 +79,8 @@ function vincularEventos() {
     });
 
     document.addEventListener("pointerdown", () => {
-        if (el.audioConfirmacao) {
-            el.audioConfirmacao.load();
-        }
+        if (el.audioConfirmacaoCurta) el.audioConfirmacaoCurta.load();
+        if (el.audioPililiFinal) el.audioPililiFinal.load();
     }, { once: true });
 
     document.addEventListener("keydown", (evento) => {
@@ -311,7 +311,14 @@ function confirmar() {
     }
 
     votoEleitorAtual.votos.push(registroVoto);
-    tocarConfirmacao();
+
+    const ultimaEtapa = etapaAtual === cargos2026.length - 1;
+    if (ultimaEtapa) {
+        tocarPililiFinal();
+    } else {
+        tocarConfirmacaoCurta();
+    }
+
     etapaAtual += 1;
 
     if (etapaAtual < cargos2026.length) {
@@ -527,21 +534,21 @@ function alternarSom() {
     el.btnSom.setAttribute("aria-pressed", String(somAtivo));
 
     if (somAtivo) {
-        tocarConfirmacao();
+        tocarConfirmacaoCurta();
     }
 }
 
-async function tocarConfirmacao() {
+async function tocarConfirmacaoCurta() {
     if (!somAtivo) return;
 
     // Primeira opção: arquivo WAV local empacotado no projeto.
     // Como a função é chamada a partir do clique em CONFIRMA, navegadores
     // modernos permitem a reprodução sem depender de autoplay.
-    if (el.audioConfirmacao) {
+    if (el.audioConfirmacaoCurta) {
         try {
-            el.audioConfirmacao.pause();
-            el.audioConfirmacao.currentTime = 0;
-            await el.audioConfirmacao.play();
+            el.audioConfirmacaoCurta.pause();
+            el.audioConfirmacaoCurta.currentTime = 0;
+            await el.audioConfirmacaoCurta.play();
             return;
         } catch (erro) {
             console.warn("Falha ao reproduzir WAV local. Usando fallback Web Audio.", erro);
@@ -580,6 +587,48 @@ async function tocarConfirmacao() {
         });
     } catch (erro) {
         console.warn("Áudio indisponível neste navegador.", erro);
+    }
+}
+
+async function tocarPililiFinal() {
+    if (!somAtivo) return;
+
+    if (el.audioPililiFinal) {
+        try {
+            el.audioPililiFinal.pause();
+            el.audioPililiFinal.currentTime = 0;
+            await el.audioPililiFinal.play();
+            return;
+        } catch (erro) {
+            console.warn("Falha ao reproduzir o pilili final. Usando fallback Web Audio.", erro);
+        }
+    }
+
+    try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        if (!contextoAudio) contextoAudio = new AudioContext();
+        if (contextoAudio.state === "suspended") await contextoAudio.resume();
+
+        const inicio = contextoAudio.currentTime;
+        const ganho = contextoAudio.createGain();
+        ganho.connect(contextoAudio.destination);
+        ganho.gain.setValueAtTime(0.12, inicio);
+
+        [
+            { atraso: 0.00, frequencia: 880, duracao: 0.105 },
+            { atraso: 0.145, frequencia: 1320, duracao: 0.105 },
+            { atraso: 0.290, frequencia: 1320, duracao: 0.185 }
+        ].forEach(({ atraso, frequencia, duracao }) => {
+            const oscilador = contextoAudio.createOscillator();
+            oscilador.type = "square";
+            oscilador.frequency.setValueAtTime(frequencia, inicio + atraso);
+            oscilador.connect(ganho);
+            oscilador.start(inicio + atraso);
+            oscilador.stop(inicio + atraso + duracao);
+        });
+    } catch (erro) {
+        console.warn("Pilili indisponível neste navegador.", erro);
     }
 }
 

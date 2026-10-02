@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urna Eletrônica - Simulação 2026</title>
+    <link rel="stylesheet" href="style.css">
+    <audio id="audioConfirmacaoCurta" preload="auto">
+        <source src="assets/audio/confirmacao-curta.wav" type="audio/wav">
+    </audio>
+    <audio id="audioPililiFinal" preload="auto">
+        <source src="assets/audio/pilili-final.wav" type="audio/wav">
+    </audio>
+
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <main class="pagina-urna">
+        <header class="barra-superior">
+            <div>
+                <span class="rotulo-sistema">SIMULAÇÃO ELEITORAL 2026</span>
+                <h1>Urna Eletrônica</h1>
+            </div>
+            <div class="controles-superiores">
+                <div class="status-dados" id="statusDados" aria-live="polite">Carregando candidatos...</div>
+                <button class="btn-auxiliar" id="btnSom" type="button" aria-pressed="true">Som da urna: ligado</button>
+                <button class="btn-auxiliar" id="btnBoletim" type="button" disabled>Boletim de Urna</button>
+                <button class="btn-tse" id="btnEncerrar" type="button">Encerrar votação</button>
+            </div>
+        </header>
+
+        <section class="painel-status" aria-label="Status da votação">
+            <div class="status-item">
+                <span>Eleitores concluídos</span>
+                <strong id="totalEleitores">0</strong>
+            </div>
+            <div class="status-item">
+                <span>Etapa atual</span>
+                <strong id="etapaVotacao">1 de 6</strong>
+            </div>
+            <div class="status-item">
+                <span>Partidos carregados</span>
+                <strong id="totalPartidos">0</strong>
+            </div>
+        </section>
+
+        <section class="urna" aria-label="Urna eletrônica">
+            <div class="tela" id="tela">
+                <div id="conteudoVoto" class="conteudo-voto">
+                    <div class="tela-topo">
+                        <div>
+                            <span class="seu-voto">SEU VOTO PARA</span>
+                            <div class="cargo-titulo" id="lblCargo">---</div>
+                        </div>
+                        <div class="foto-box" id="fotoBox" hidden>
+                            <img id="imgCandidato" class="foto-candidato" src="" alt="">
+                        </div>
+                    </div>
+
+                    <div class="quadrados-numero" id="containerDigitos" aria-label="Número do candidato"></div>
+
+                    <div class="dados-candidato" id="dadosCandidato" aria-live="polite"></div>
+
+                    <div class="tela-instrucoes" id="instrucoes">
+                        <span><b>CONFIRMA</b> para registrar o voto</span>
+                        <span><b>CORRIGE</b> para reiniciar esta etapa</span>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="teclado" aria-label="Teclado da urna">
+                <div class="teclado-topo">JUSTIÇA ELEITORAL</div>
+
+                <div class="teclado-numerico">
+                    <button class="btn-num" type="button" data-numero="1">1</button>
+                    <button class="btn-num" type="button" data-numero="2">2</button>
+                    <button class="btn-num" type="button" data-numero="3">3</button>
+                    <button class="btn-num" type="button" data-numero="4">4</button>
+                    <button class="btn-num" type="button" data-numero="5">5</button>
+                    <button class="btn-num" type="button" data-numero="6">6</button>
+                    <button class="btn-num" type="button" data-numero="7">7</button>
+                    <button class="btn-num" type="button" data-numero="8">8</button>
+                    <button class="btn-num" type="button" data-numero="9">9</button>
+                    <span></span>
+                    <button class="btn-num" type="button" data-numero="0">0</button>
+                    <span></span>
+                </div>
+
+                <div class="teclado-acoes">
+                    <button class="btn-acao btn-branco" id="btnBranco" type="button">BRANCO</button>
+                    <button class="btn-acao btn-corrige" id="btnCorrige" type="button">CORRIGE</button>
+                    <button class="btn-acao btn-confirma" id="btnConfirma" type="button">CONFIRMA</button>
+                </div>
+            </aside>
+        </section>
+
+        <p class="atalhos">Também é possível usar o teclado físico: números, <kbd>Backspace</kbd> para corrigir e <kbd>Enter</kbd> para confirmar.</p>
+    </main>
+
+    <div class="modal-backdrop" id="modalBoletim" hidden>
+        <section class="modal-boletim" role="dialog" aria-modal="true" aria-labelledby="tituloBoletim">
+            <header class="modal-boletim__topo">
+                <div>
+                    <span class="rotulo-sistema">APURAÇÃO DA URNA</span>
+                    <h2 id="tituloBoletim">Boletim de Urna</h2>
+                </div>
+                <button class="btn-fechar" id="btnFecharBoletim" type="button" aria-label="Fechar boletim">×</button>
+            </header>
+            <div class="resumo-boletim" id="resumoBoletim"></div>
+            <div class="conteudo-boletim" id="conteudoBoletim"></div>
+            <footer class="modal-boletim__acoes">
+                <button class="btn-auxiliar" id="btnBaixarBoletim" type="button">Baixar boletimDeUrna.json</button>
+                <button class="btn-tse" id="btnFecharBoletimRodape" type="button">Fechar</button>
+            </footer>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,496 @@
+:root {
+    --fundo: #eef1f4;
+    --superficie: #ffffff;
+    --texto: #17202a;
+    --texto-suave: #5f6b78;
+    --borda: #c8ced5;
+    --urna: #d9d9d4;
+    --urna-borda: #aaa99f;
+    --tela: #dce9d3;
+    --tela-borda: #6f7869;
+    --teclado: #252525;
+    --tecla: #0f0f0f;
+    --branco: #f7f7f7;
+    --corrige: #f07a33;
+    --confirma: #22a447;
+    --azul: #173c63;
+    --azul-escuro: #0d2c4d;
+    --perigo: #b52222;
+    --sombra: 0 18px 50px rgba(28, 39, 49, 0.18);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--texto);
+    background: linear-gradient(180deg, #f7f8fa 0%, var(--fundo) 100%);
+}
+
+button { font: inherit; }
+
+.pagina-urna {
+    width: min(1100px, calc(100% - 32px));
+    margin: 24px auto 40px;
+}
+
+.barra-superior {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 16px;
+}
+
+.rotulo-sistema {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--azul);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+h1 {
+    margin: 0;
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+}
+
+.controles-superiores {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.status-dados {
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+}
+
+.status-dados.ok { color: #17753a; font-weight: 700; }
+.status-dados.erro { color: var(--perigo); font-weight: 700; }
+
+.btn-tse {
+    border: 0;
+    border-radius: 8px;
+    padding: 12px 18px;
+    color: #fff;
+    background: var(--azul);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-tse:hover { background: var(--azul-escuro); }
+.btn-tse:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.painel-status {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.status-item {
+    padding: 12px 14px;
+    border: 1px solid #d8dde3;
+    border-radius: 10px;
+    background: var(--superficie);
+}
+
+.status-item span {
+    display: block;
+    color: var(--texto-suave);
+    font-size: 0.78rem;
+    margin-bottom: 3px;
+}
+
+.status-item strong { font-size: 1.1rem; }
+
+.urna {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 28px;
+    padding: 28px;
+    border: 2px solid var(--urna-borda);
+    border-radius: 14px;
+    background: var(--urna);
+    box-shadow: var(--sombra);
+}
+
+.tela {
+    min-width: 0;
+    height: 420px;
+    padding: 22px;
+    border: 2px solid var(--tela-borda);
+    border-radius: 6px;
+    background: var(--tela);
+    box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.08);
+}
+
+.conteudo-voto {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tela-topo {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.seu-voto {
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+}
+
+.cargo-titulo {
+    margin-top: 6px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.foto-box {
+    width: 122px;
+    height: 142px;
+    padding: 4px;
+    border: 1px solid #404640;
+    background: #fff;
+}
+
+.foto-candidato {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.quadrados-numero {
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 18px;
+}
+
+.digito {
+    width: 34px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #111;
+    background: rgba(255, 255, 255, 0.42);
+    font-size: 1.55rem;
+    font-weight: 700;
+}
+
+.digito.pisca { animation: pisca 0.9s infinite; }
+
+@keyframes pisca {
+    0%, 100% { border-color: #111; }
+    50% { border-color: transparent; }
+}
+
+.dados-candidato {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 110px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.candidato-nome {
+    font-size: 1.45rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.candidato-partido { font-size: 1rem; }
+
+.voto-aviso {
+    font-size: 1.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.voto-aviso.nulo { color: #8d1e1e; }
+
+.tela-instrucoes {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    padding-top: 9px;
+    border-top: 1px solid #323832;
+    font-size: 0.76rem;
+}
+
+.teclado {
+    align-self: center;
+    padding: 22px;
+    border-radius: 8px;
+    background: var(--teclado);
+    box-shadow: inset 0 0 0 1px #3a3a3a;
+}
+
+.teclado-topo {
+    margin-bottom: 14px;
+    color: #fff;
+    text-align: right;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+}
+
+.teclado-numerico {
+    display: grid;
+    grid-template-columns: repeat(3, 62px);
+    justify-content: center;
+    gap: 12px;
+}
+
+.btn-num {
+    width: 62px;
+    height: 48px;
+    border: 0;
+    border-radius: 4px;
+    color: #fff;
+    background: var(--tecla);
+    box-shadow: 0 3px 0 #000;
+    font-size: 1.35rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-num:active,
+.btn-acao:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #000;
+}
+
+.teclado-acoes {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr;
+    align-items: end;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.btn-acao {
+    height: 48px;
+    border: 0;
+    border-radius: 3px;
+    color: #111;
+    box-shadow: 0 3px 0 #000;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-branco { background: var(--branco); }
+.btn-corrige { background: var(--corrige); }
+.btn-confirma { height: 56px; background: var(--confirma); }
+
+.mensagem-centro,
+.mensagem-fim {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.mensagem-centro {
+    gap: 10px;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.mensagem-centro small {
+    color: #38433a;
+    font-size: 0.95rem;
+    font-weight: 400;
+}
+
+.mensagem-fim {
+    font-size: clamp(4rem, 10vw, 7rem);
+    font-weight: 700;
+    letter-spacing: 0.35em;
+}
+
+.atalhos {
+    margin: 14px 4px 0;
+    color: var(--texto-suave);
+    font-size: 0.82rem;
+}
+
+kbd {
+    padding: 2px 6px;
+    border: 1px solid #c4c9cf;
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    background: #fff;
+}
+
+@media (max-width: 860px) {
+    .barra-superior { align-items: flex-start; flex-direction: column; }
+    .controles-superiores { width: 100%; justify-content: space-between; }
+    .urna { grid-template-columns: 1fr; }
+    .teclado { width: min(100%, 340px); }
+}
+
+@media (max-width: 560px) {
+    .pagina-urna { width: min(100%, calc(100% - 16px)); margin-top: 12px; }
+    .painel-status { grid-template-columns: 1fr; }
+    .urna { padding: 12px; gap: 16px; }
+    .tela { height: 390px; padding: 14px; }
+    .foto-box { width: 92px; height: 112px; }
+    .teclado { padding: 16px; }
+    .teclado-numerico { grid-template-columns: repeat(3, 56px); gap: 10px; }
+    .btn-num { width: 56px; }
+    .controles-superiores { align-items: stretch; flex-direction: column; }
+}
+
+.btn-auxiliar {
+    border: 1px solid #c8d0d9;
+    border-radius: 8px;
+    padding: 11px 14px;
+    color: var(--azul);
+    background: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-auxiliar:hover:not(:disabled) { background: #f3f6f9; }
+.btn-auxiliar:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: rgba(12, 24, 36, 0.62);
+}
+
+.modal-backdrop[hidden] { display: none; }
+
+.modal-boletim {
+    width: min(940px, 100%);
+    max-height: min(88vh, 900px);
+    overflow: auto;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 28px 90px rgba(0, 0, 0, 0.3);
+}
+
+.modal-boletim__topo,
+.modal-boletim__acoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 24px;
+}
+
+.modal-boletim__topo {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    border-bottom: 1px solid #dce1e6;
+    background: #fff;
+}
+
+.modal-boletim__topo h2 { margin: 2px 0 0; }
+
+.btn-fechar {
+    width: 42px;
+    height: 42px;
+    border: 0;
+    border-radius: 8px;
+    background: #eef2f5;
+    color: #243241;
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.resumo-boletim {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 20px 24px 0;
+}
+
+.resumo-card {
+    padding: 14px 16px;
+    border: 1px solid #d9dee4;
+    border-radius: 10px;
+    background: #f8fafb;
+}
+
+.resumo-card span {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--texto-suave);
+    font-size: 0.78rem;
+}
+
+.resumo-card strong { font-size: 1.35rem; }
+
+.conteudo-boletim {
+    display: grid;
+    gap: 16px;
+    padding: 20px 24px 24px;
+}
+
+.cargo-apuracao {
+    overflow: hidden;
+    border: 1px solid #d9dee4;
+    border-radius: 10px;
+}
+
+.cargo-apuracao h3 {
+    margin: 0;
+    padding: 12px 16px;
+    color: #fff;
+    background: var(--azul);
+    font-size: 1rem;
+}
+
+.apuracao-linha {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 130px 90px;
+    gap: 12px;
+    align-items: center;
+    padding: 11px 16px;
+    border-top: 1px solid #edf0f3;
+}
+
+.apuracao-linha:first-of-type { border-top: 0; }
+.apuracao-linha small { color: var(--texto-suave); }
+.apuracao-linha .numero-apuracao { font-weight: 700; }
+.apuracao-linha .total-apuracao { text-align: right; font-weight: 700; }
+.apuracao-linha.especial { background: #fafbfc; }
+
+.modal-boletim__acoes {
+    position: sticky;
+    bottom: 0;
+    border-top: 1px solid #dce1e6;
+    background: #fff;
+}
+
+@media (max-width: 760px) {
+    .controles-superiores { flex-wrap: wrap; justify-content: flex-end; }
+    .resumo-boletim { grid-template-columns: 1fr; }
+    .apuracao-linha { grid-template-columns: 1fr auto; }
+    .apuracao-linha .numero-apuracao { grid-column: 1; }
+    .apuracao-linha .total-apuracao { grid-column: 2; grid-row: 1 / span 2; }
+    .modal-boletim__acoes { flex-direction: column; align-items: stretch; }
+}

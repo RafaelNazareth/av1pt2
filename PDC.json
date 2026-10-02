@@ -1,0 +1,51 @@
+[
+  {
+    "nome": "Superman",
+    "numero": "93",
+    "foto": "assets/heroes/superman.webp",
+    "cargo": "Presidente",
+    "posicao": 1
+  },
+  {
+    "nome": "Batman",
+    "numero": "93",
+    "foto": "assets/heroes/batman.webp",
+    "cargo": "Governador(a)",
+    "posicao": 2
+  },
+  {
+    "nome": "Flash",
+    "numero": "935",
+    "foto": "assets/heroes/flash.webp",
+    "cargo": "Senador(a)",
+    "posicao": 3
+  },
+  {
+    "nome": "Lanterna Verde",
+    "numero": "934",
+    "foto": "assets/heroes/lanterna-verde.jpg",
+    "cargo": "Senador(a)",
+    "posicao": 4
+  },
+  {
+    "nome": "Aquaman",
+    "numero": "9354",
+    "foto": "assets/heroes/aquaman.jpg",
+    "cargo": "Deputado(a) Federal",
+    "posicao": 5
+  },
+  {
+    "nome": "Ciborgue",
+    "numero": "9387",
+    "foto": "assets/heroes/ciborgue.jpg",
+    "cargo": "Deputado(a) Federal",
+    "posicao": 6
+  },
+  {
+    "nome": "Arqueiro Verde",
+    "numero": "93567",
+    "foto": "assets/heroes/arqueiro-verde.jpg",
+    "cargo": "Deputado(a) Estadual",
+    "posicao": 7
+  }
+]

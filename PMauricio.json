@@ -1,0 +1,44 @@
+[
+  {
+    "nome": "Mônica",
+    "numero": "94",
+    "foto": "https://www.clipartmax.com/png/middle/35-355580_monica-07-vestido-da-turma-da-monica.png",
+    "cargo": "Presidente"
+  },
+  {
+    "nome": "Cebolinha",
+    "numero": "94",
+    "foto": "https://www.clipartmax.com/png/middle/39-392254_turma-da-m%C3%B4nica-cebolinha-monicas-gang-jimmy-five.png",
+    "cargo": "Governador(a)"
+  },
+  {
+    "nome": "Cascão",
+    "numero": "944",
+    "foto": "https://www.clipartmax.com/png/middle/300-3003308_turma-da-m%C3%B4nica-casc%C3%A3o-casc%C3%A3o-n%C3%A3o-toma-banho.png",
+    "cargo": "Senador(a)"
+  },
+  {
+    "nome": "Magali",
+    "numero": "943",
+    "foto": "https://www.clipartmax.com/png/middle/36-363949_turma-da-monica-magali-04-magali-turma-da-monica.png",
+    "cargo": "Senador(a)"
+  },
+  {
+    "nome": "Chico Bento",
+    "numero": "9443",
+    "foto": "https://www.clipartmax.com/png/middle/91-918906_turma-da-m%C3%B4nica-chico-bento-personagem-turma-da-monica.png",
+    "cargo": "Deputado(a) Federal"
+  },
+  {
+    "nome": "Franjinha",
+    "numero": "9442",
+    "foto": "https://www.nicepng.com/png/full/343-3430823_franklin-franjinha-turma-da-monica.png",
+    "cargo": "Deputado(a) Federal"
+  },
+  {
+    "nome": "Bidú",
+    "numero": "94432",
+    "foto": "https://www.clipartmax.com/png/middle/118-1183035_bid%C3%BA-bidu-turma-da-monica.png",
+    "cargo": "Deputado(a) Estadual"
+  }
+]
